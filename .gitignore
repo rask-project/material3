@@ -1,3 +1,5 @@
+*.patch
+
 # C++ objects and libs
 *.slo
 *.lo
