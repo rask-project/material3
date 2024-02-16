@@ -5,61 +5,82 @@
 ## qtquickcontrols2materialstyleplugin Plugin:
 #####################################################################
 
-set(qml_files
-    "ApplicationWindow.qml"
-    "BusyIndicator.qml"
-    "Button.qml"
-    "CheckBox.qml"
-    "CheckDelegate.qml"
-    "ComboBox.qml"
-    "DelayButton.qml"
-    "Dial.qml"
-    "Dialog.qml"
-    "DialogButtonBox.qml"
-    "Drawer.qml"
-    "Frame.qml"
-    "GroupBox.qml"
-    "HorizontalHeaderView.qml"
-    "ItemDelegate.qml"
-    "Label.qml"
-    "Menu.qml"
-    "MenuBar.qml"
-    "MenuBarItem.qml"
-    "MenuItem.qml"
-    "MenuSeparator.qml"
-    "Page.qml"
-    "PageIndicator.qml"
-    "Pane.qml"
-    "Popup.qml"
-    "ProgressBar.qml"
-    "RadioButton.qml"
-    "RadioDelegate.qml"
-    "RangeSlider.qml"
-    "RoundButton.qml"
-    "ScrollView.qml"
-    "ScrollBar.qml"
-    "ScrollIndicator.qml"
-    "SelectionRectangle.qml"
-    "Slider.qml"
-    "SpinBox.qml"
-    "SplitView.qml"
-    "StackView.qml"
-    "SwipeDelegate.qml"
-    "SwipeView.qml"
-    "Switch.qml"
-    "SwitchDelegate.qml"
-    "TabBar.qml"
-    "TabButton.qml"
-    "TextArea.qml"
-    "TextField.qml"
-    "ToolBar.qml"
-    "ToolButton.qml"
-    "ToolSeparator.qml"
-    "ToolTip.qml"
-    "TreeViewDelegate.qml"
-    "Tumbler.qml"
-    "VerticalHeaderView.qml"
+cmake_minimum_required(VERSION 3.22...3.27)
+
+option(NO_EFFECTS "Disable Material3 effects" OFF)
+option(DENSE_VARIANT "Enable dense variant theme" OFF)
+
+project(qtquickcontrols2materialstyleplugin
+    VERSION 2.0.0
+    DESCRIPTION "Qt Quick Controls Material3 Style"
+    LANGUAGES CXX
 )
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Gui Qml Quick QuickControls2 QuickTemplates2 QuickControls2Impl)
+find_package(Qt6 COMPONENTS ShaderTools)
+
+qt_standard_project_setup(REQUIRES 6.5)
+
+set(PLUGIN_URI_PATH QtQuick/Controls/Material3)
+set(PLUGIN_PATH ${DEST_DIR}/${PLUGIN_URI_PATH})
+set(PLUGIN_URI QtQuick.Controls.Material3)
+
+set(QML_FILES
+    ApplicationWindow.qml
+    BusyIndicator.qml
+    Button.qml
+    CheckBox.qml
+    CheckDelegate.qml
+    ComboBox.qml
+    DelayButton.qml
+    Dial.qml
+    Dialog.qml
+    DialogButtonBox.qml
+    Drawer.qml
+    Frame.qml
+    GroupBox.qml
+    HorizontalHeaderView.qml
+    ItemDelegate.qml
+    Label.qml
+    Menu.qml
+    MenuBar.qml
+    MenuBarItem.qml
+    MenuItem.qml
+    MenuSeparator.qml
+    Page.qml
+    PageIndicator.qml
+    Pane.qml
+    Popup.qml
+    ProgressBar.qml
+    RadioButton.qml
+    RadioDelegate.qml
+    RangeSlider.qml
+    RoundButton.qml
+    ScrollView.qml
+    ScrollBar.qml
+    ScrollIndicator.qml
+    SelectionRectangle.qml
+    Slider.qml
+    SpinBox.qml
+    SplitView.qml
+    StackView.qml
+    SwipeDelegate.qml
+    SwipeView.qml
+    Switch.qml
+    SwitchDelegate.qml
+    TabBar.qml
+    TabButton.qml
+    TextArea.qml
+    TextField.qml
+    ToolBar.qml
+    ToolButton.qml
+    ToolSeparator.qml
+    ToolTip.qml
+    TreeViewDelegate.qml
+    Tumbler.qml
+    VerticalHeaderView.qml
+)
+
 set_source_files_properties(DelayButton.qml PROPERTIES
     QT_QML_SOURCE_VERSIONS "2.2;6.0"
 )
@@ -94,40 +115,45 @@ set_source_files_properties(VerticalHeaderView.qml PROPERTIES
     QT_QML_SOURCE_VERSIONS "2.15;6.0"
 )
 
-qt_internal_add_qml_module(qtquickcontrols2materialstyleplugin
-    URI "QtQuick.Controls.Material"
-    VERSION "${PROJECT_VERSION}"
+qt6_add_qml_module(${PROJECT_NAME}
+    URI ${PLUGIN_URI}
+    VERSION ${PROJECT_VERSION}
     PAST_MAJOR_VERSIONS 2
     CLASS_NAME QtQuickControls2MaterialStylePlugin
     DEPENDENCIES
         QtQuick/auto
     IMPORTS
         QtQuick.Controls.Basic/auto
-    PLUGIN_TARGET qtquickcontrols2materialstyleplugin
+    PLUGIN_TARGET ${PROJECT_NAME}
+    OUTPUT_DIRECTORY ${PLUGIN_PATH}
+    IMPORT_PATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
     NO_PLUGIN_OPTIONAL
     NO_GENERATE_PLUGIN_SOURCE
+    RESOURCE_PREFIX /
+    OUTPUT_TARGETS output_targets
+    FOLLOW_FOREIGN_VERSIONING
     SOURCES
         qquickmaterialstyle.cpp qquickmaterialstyle_p.h
         qquickmaterialtheme.cpp qquickmaterialtheme_p.h
         qtquickcontrols2materialstyleplugin.cpp
     QML_FILES
-        ${qml_files}
-    DEFINES
-        QT_NO_CAST_FROM_ASCII
-        QT_NO_CAST_TO_ASCII
-    LIBRARIES
-        Qt::CorePrivate
-        Qt::GuiPrivate
-        Qt::QmlPrivate
-        Qt::QuickControls2ImplPrivate
-        Qt::QuickControls2Private
-        Qt::QuickPrivate
-        Qt::QuickTemplates2Private
+        ${QML_FILES}
 )
 
-qt_internal_add_resource(qtquickcontrols2materialstyleplugin "qtquickcontrols2materialstyleplugin"
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        Qt6::CorePrivate
+        Qt6::GuiPrivate
+        Qt6::QmlPrivate
+        Qt6::QuickControls2ImplPrivate
+        Qt6::QuickControls2Private
+        Qt6::QuickPrivate
+        Qt6::QuickTemplates2Private
+)
+
+qt6_add_resources(${PROJECT_NAME} "${PROJECT_NAME}"
     PREFIX
-        "/qt-project.org/imports/QtQuick/Controls/Material"
+        ${PLUGIN_URI_PATH}
     FILES
         "images/arrow-indicator.png"
         "images/arrow-indicator@2x.png"
@@ -143,23 +169,26 @@ qt_internal_add_resource(qtquickcontrols2materialstyleplugin "qtquickcontrols2ma
         "images/drop-indicator@4x.png"
 )
 
-qt_internal_add_shaders(qtquickcontrols2materialstyleplugin "qtquickcontrols2materialstyleplugin_shaders"
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+        QT_QMLCACHEGEN_DIRECT_CALLS ON
+)
+
+qt6_add_shaders(qtquickcontrols2materialstyleplugin "qtquickcontrols2materialstyleplugin_shaders"
     SILENT
     BATCHABLE
     PRECOMPILE
     OPTIMIZED
     PREFIX
-        "/qt-project.org/imports/QtQuick/Controls/Material"
+        ${PLUGIN_URI_PATH}
     FILES
-        "shaders/RectangularGlow.frag"
+        shaders/RectangularGlow.frag
 )
 
 add_subdirectory(impl)
 
-_qt_internal_add_qml_static_plugin_dependency(qtquickcontrols2materialstyleplugin quickwindow)
-_qt_internal_add_qml_static_plugin_dependency(qtquickcontrols2materialstyleplugin
-                                              qtquickcontrols2materialstyleimplplugin)
-
-# Basic style is the required fallback style.
-_qt_internal_add_qml_static_plugin_dependency(qtquickcontrols2materialstyleplugin
-                                              qtquickcontrols2basicstyleplugin)
+target_compile_definitions(${PROJECT_NAME}
+    PUBLIC
+        NO_EFFECTS=$<IF:$<BOOL:${NO_EFFECTS}>,1,0>
+        DENSE_VARIANT=$<IF:$<BOOL:${DENSE_VARIANT}>,1,0>
+)

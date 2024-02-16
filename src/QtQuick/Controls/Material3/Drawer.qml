@@ -3,8 +3,8 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.Drawer {
     id: control
@@ -38,7 +38,7 @@ T.Drawer {
         bottomPadding: edge === Qt.BottomEdge ? -radius : 0
         clip: true
 
-        layer.enabled: control.position > 0 && control.Material.elevation > 0
+        layer.enabled: !control.Material.noEffects && control.position > 0 && control.Material.elevation > 0
         layer.effect: RoundedElevationEffect {
             elevation: control.Material.elevation
             roundedScale: control.background.radius

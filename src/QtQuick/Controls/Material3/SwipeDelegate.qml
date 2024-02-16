@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.SwipeDelegate {
     id: control
@@ -39,9 +39,16 @@ T.SwipeDelegate {
     }
 
     background: Rectangle {
+        id: backgroundRect
+
+        readonly property color delegateColor: control.Material.backgroundColor
+
         implicitHeight: control.Material.delegateHeight
 
-        color: control.Material.backgroundColor
+        color: control.Material.noEffects && control.down ?
+                   control.Material.theme === Material.Dark ?
+                       Qt.lighter(backgroundRect.delegateColor) :
+                       Qt.darker(backgroundRect.delegateColor) : backgroundRect.delegateColor
 
         Rectangle {
             width: parent.width
@@ -59,7 +66,7 @@ T.SwipeDelegate {
             anchor: control
             active: enabled && (control.down || control.visualFocus || control.hovered)
             color: control.Material.rippleColor
-            enabled: control.swipe.position === 0
+            enabled: !control.Material.noEffects && control.swipe.position === 0
         }
     }
 }

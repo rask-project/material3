@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.ItemDelegate {
     id: control
@@ -37,11 +37,20 @@ T.ItemDelegate {
     }
 
     background: Rectangle {
+        id: backgroundRect
+
+        readonly property color delegateColor: control.highlighted ? control.Material.listHighlightColor : "transparent"
+
         implicitHeight: control.Material.delegateHeight
 
-        color: control.highlighted ? control.Material.listHighlightColor : "transparent"
+        color: control.Material.noEffects && control.down ?
+                   control.Material.theme === Material.Dark ?
+                       Qt.lighter(control.Material.listHighlightColor) :
+                       Qt.darker(control.Material.listHighlightColor) : backgroundRect.delegateColor
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             width: parent.width
             height: parent.height
 

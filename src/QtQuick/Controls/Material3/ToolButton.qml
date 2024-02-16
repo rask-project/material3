@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.ToolButton {
     id: control
@@ -35,6 +35,8 @@ T.ToolButton {
     }
 
     background: Ripple {
+        enabled: !control.Material.noEffects
+
         implicitWidth: control.Material.touchTarget
         implicitHeight: control.Material.touchTarget
 

@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.TabButton {
     id: control
@@ -34,6 +34,7 @@ T.TabButton {
     }
 
     background: Ripple {
+        enabled: !control.Material.noEffects
         implicitHeight: control.Material.touchTarget
 
         clip: true

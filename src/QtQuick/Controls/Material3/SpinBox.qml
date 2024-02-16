@@ -3,8 +3,8 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.SpinBox {
     id: control
@@ -54,6 +54,8 @@ T.SpinBox {
         width: height
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             clipRadius: 2
             x: control.spacing
             y: control.spacing
@@ -88,6 +90,8 @@ T.SpinBox {
         width: height
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             clipRadius: 2
             x: control.spacing
             y: control.spacing

@@ -4,7 +4,7 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Templates as T
-import QtQuick.Controls.Material
+import QtQuick.Controls.Material3
 
 T.ApplicationWindow {
     id: window

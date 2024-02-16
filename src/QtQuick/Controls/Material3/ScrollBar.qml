@@ -3,7 +3,7 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.Material
+import QtQuick.Controls.Material3
 
 T.ScrollBar {
     id: control

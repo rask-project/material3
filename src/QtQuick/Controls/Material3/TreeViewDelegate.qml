@@ -4,7 +4,7 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
+import QtQuick.Controls.Material3
 
 T.TreeViewDelegate {
     id: control
@@ -41,7 +41,7 @@ T.TreeViewDelegate {
             x: (parent.width - width) / 2
             y: (parent.height - height) / 2
             rotation:  control.expanded ? 90 : (control.mirrored ? 180 : 0)
-            source: "qrc:/qt-project.org/imports/QtQuick/Controls/Material/images/arrow-indicator.png"
+            source: "qrc:/QtQuick/Controls/Material3/images/arrow-indicator.png"
             color: control.palette.windowText
             defaultColor: "#353637"
         }

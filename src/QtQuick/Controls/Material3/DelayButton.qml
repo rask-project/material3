@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.DelayButton {
     id: control
@@ -66,12 +66,14 @@ T.DelayButton {
             }
         }
 
-        layer.enabled: control.enabled && color.a > 0 && !control.flat
+        layer.enabled: !control.Material.noEffects && control.enabled && color.a > 0 && !control.flat
         layer.effect: ElevationEffect {
             elevation: control.Material.elevation
         }
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             clipRadius: 2
             width: parent.width
             height: parent.height

@@ -5,8 +5,8 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl
 import QtQuick.Templates as T
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.ComboBox {
     id: control
@@ -38,7 +38,7 @@ T.ComboBox {
         x: control.mirrored ? control.padding : control.width - width - control.padding
         y: control.topPadding + (control.availableHeight - height) / 2
         color: control.enabled ? control.Material.foreground : control.Material.hintTextColor
-        source: "qrc:/qt-project.org/imports/QtQuick/Controls/Material/images/drop-indicator.png"
+        source: "qrc:/QtQuick/Controls/Material3/images/drop-indicator.png"
     }
 
     contentItem: T.TextField {
@@ -113,7 +113,11 @@ T.ComboBox {
             radius: 4
             color: parent.Material.dialogColor
 
-            layer.enabled: control.enabled
+            border.width: control.Material.noEffects ? 1 : 0
+            border.color: control.Material.theme === Material.Dark ?
+                              Qt.lighter(control.Material.dialogColor, 1.2) : Qt.darker(control.Material.dialogColor, 1, 2)
+
+            layer.enabled: !control.Material.noEffects && control.enabled
             layer.effect: RoundedElevationEffect {
                 elevation: 4
                 roundedScale: Material.ExtraSmallScale

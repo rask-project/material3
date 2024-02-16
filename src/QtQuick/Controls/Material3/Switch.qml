@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 
 import QtQuick
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 import QtQuick.Templates as T
 
 T.Switch {
@@ -32,6 +32,8 @@ T.Switch {
         control: control
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             x: parent.handle.x + parent.handle.width / 2 - width / 2
             y: parent.handle.y + parent.handle.height / 2 - height / 2
             width: 28

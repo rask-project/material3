@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.Dialog {
     id: control
@@ -48,7 +48,7 @@ T.Dialog {
         radius: control.Material.roundedScale
         color: control.Material.dialogColor
 
-        layer.enabled: control.Material.elevation > 0
+        layer.enabled: !control.Material.noEffects && control.Material.elevation > 0
         layer.effect: RoundedElevationEffect {
             elevation: control.Material.elevation
             roundedScale: control.background.radius

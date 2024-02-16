@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.MenuBarItem {
     id: control
@@ -42,6 +42,8 @@ T.MenuBarItem {
         color: control.highlighted ? control.Material.listHighlightColor : "transparent"
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             width: parent.width
             height: parent.height
 

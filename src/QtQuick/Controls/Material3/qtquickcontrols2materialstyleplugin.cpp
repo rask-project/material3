@@ -10,8 +10,8 @@
 
 QT_BEGIN_NAMESPACE
 
-extern void qml_register_types_QtQuick_Controls_Material();
-Q_GHS_KEEP_REFERENCE(qml_register_types_QtQuick_Controls_Material);
+extern void qml_register_types_QtQuick_Controls_Material3();
+Q_GHS_KEEP_REFERENCE(qml_register_types_QtQuick_Controls_Material3);
 
 class QtQuickControls2MaterialStylePlugin : public QQuickStylePlugin
 {
@@ -29,13 +29,13 @@ public:
 
 QtQuickControls2MaterialStylePlugin::QtQuickControls2MaterialStylePlugin(QObject *parent) : QQuickStylePlugin(parent)
 {
-    volatile auto registration = &qml_register_types_QtQuick_Controls_Material;
+    volatile auto registration = &qml_register_types_QtQuick_Controls_Material3;
     Q_UNUSED(registration);
 }
 
 QString QtQuickControls2MaterialStylePlugin::name() const
 {
-    return QStringLiteral("Material");
+    return QStringLiteral("QtQuick.Controls.Material3");
 }
 
 void QtQuickControls2MaterialStylePlugin::initializeTheme(QQuickTheme *theme)

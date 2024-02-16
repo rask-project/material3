@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.MenuItem {
     id: control
@@ -39,7 +39,7 @@ T.MenuItem {
         visible: control.subMenu
         mirror: control.mirrored
         color: control.enabled ? control.Material.foreground : control.Material.hintTextColor
-        source: "qrc:/qt-project.org/imports/QtQuick/Controls/Material/images/arrow-indicator.png"
+        source: "qrc:/QtQuick/Controls/Material3/images/arrow-indicator.png"
     }
 
     contentItem: IconLabel {
@@ -65,6 +65,8 @@ T.MenuItem {
         color: control.highlighted ? control.Material.listHighlightColor : "transparent"
 
         Ripple {
+            enabled: !control.Material.noEffects
+
             width: parent.width
             height: parent.height
 

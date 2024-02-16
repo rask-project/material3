@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.Button {
     id: control
@@ -48,17 +48,21 @@ T.Button {
     }
 
     background: Rectangle {
+        id: backgroundRect
+
+        readonly property color buttonColor: control.Material.buttonColor(control.Material.theme, control.Material.background,
+            control.Material.accent, control.enabled, control.flat, control.highlighted, control.checked)
+
         implicitWidth: 64
         implicitHeight: control.Material.buttonHeight
 
         radius: control.Material.roundedScale === Material.FullScale ? height / 2 : control.Material.roundedScale
-        color: control.Material.buttonColor(control.Material.theme, control.Material.background,
-            control.Material.accent, control.enabled, control.flat, control.highlighted, control.checked)
+        color: control.Material.noEffects && control.down ? Qt.darker(backgroundRect.buttonColor) : backgroundRect.buttonColor
 
         // The layer is disabled when the button color is transparent so you can do
         // Material.background: "transparent" and get a proper flat button without needing
         // to set Material.elevation as well
-        layer.enabled: control.enabled && color.a > 0 && !control.flat
+        layer.enabled: !control.Material.noEffects && control.enabled && color.a > 0 && !control.flat
         layer.effect: RoundedElevationEffect {
             elevation: control.Material.elevation
             roundedScale: control.background.radius
@@ -71,7 +75,7 @@ T.Button {
             height: parent.height
             pressed: control.pressed
             anchor: control
-            active: enabled && (control.down || control.visualFocus || control.hovered)
+            active: !control.Material.noEffects && enabled && (control.down || control.visualFocus || control.hovered)
             color: control.flat && control.highlighted ? control.Material.highlightedRippleColor : control.Material.rippleColor
         }
     }

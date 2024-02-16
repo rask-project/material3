@@ -3,8 +3,8 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 import QtQuick.Window
 
 T.Menu {
@@ -57,7 +57,11 @@ T.Menu {
         radius: control.Material.roundedScale
         color: control.Material.dialogColor
 
-        layer.enabled: control.Material.elevation > 0
+        border.width: control.Material.noEffects ? 1 : 0
+        border.color: control.Material.theme === Material.Dark ?
+                          Qt.lighter(control.Material.dialogColor, 1.2) : Qt.darker(control.Material.dialogColor, 1.2)
+
+        layer.enabled: !control.Material.noEffects && control.Material.elevation > 0
         layer.effect: RoundedElevationEffect {
             elevation: control.Material.elevation
             roundedScale: control.background.radius

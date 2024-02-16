@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material3
+import QtQuick.Controls.Material3.impl
 
 T.SelectionRectangle {
     id: control
@@ -17,7 +17,7 @@ T.SelectionRectangle {
         id: handle
         SliderHandle {
             palette: SelectionRectangle.control.palette
-            handlePressed: tapHandler.pressed || SelectionRectangle.dragging
+            handlePressed: tapHandler.pressed || SelectionRectangle.dragging
             handleHovered: hoverHandler.hovered
             visible: SelectionRectangle.control.active
 
