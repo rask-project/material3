@@ -1,2 +1,2 @@
-# material3
+# QtQuick Controls Material3
 Added Material 3 theme features for QtQuick controls.
